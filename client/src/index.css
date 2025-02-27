@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+
+.menuItems li{
+    @apply  hover:underline cursor-pointer hover:text-blue-800
+} 
