@@ -1,57 +1,68 @@
-import Button from '../../utils/Button'
-import Input from '../../utils/Input'
-import Logo from '../header/Logo'
-import Google from '../../images/google.png'
-import Github from '../../images/github.png'
+import Button from '../../utils/Button';
+import Input from '../../utils/Input';
+import Logo from '../header/Logo';
+import Google from '../../images/google.png';
+import Github from '../../images/github.png';
+import { useContext } from 'react';
+import { AuthContext } from '../../store/Context/AuthContext';
+
 export default function Login() {
-    return (
-      <>
-        <div className="sm:w-96 lg:w-[450px] px-6 py-12 lg:px-8 shadow-2xl shadow-gray-400 rounded-4xl mt-10">
-          <div className="sm:mx-auto w-fit">
-            <Logo imgStyle = {"w-9 h-8"} nameStyle={"text-4xl font-semibold"}/>
-            <h2 className=" text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-              Login to your account
-            </h2>
+  const {authDispatch} = useContext(AuthContext)
+  return (
+    <div className="flex justify-center items-center  bg-gray-100">
+      <div className="sm:w-96 lg:w-[450px] px-8 py-12 bg-white shadow-lg rounded-2xl">
+        <div className="sm:mx-auto w-fit text-center">
+          <Logo imgStyle="w-10 h-10" nameStyle="text-3xl font-bold text-gray-800" />
+          <h2 className="mt-4 text-2xl font-semibold text-gray-900">
+            Login to Your Account
+          </h2>
+        </div>
+
+        <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-5">
+            <Input
+              type="text"
+              labelName="Email"
+              id="login-email"
+              placeHolder="Enter your email"
+            />
+            <Input
+              type="password"
+              labelName="Password"
+              id="login-password"
+              placeHolder="Enter your password"
+              passwordField
+            />
+            <Button btnStyle="bg-blue-600 hover:bg-blue-700 transition-all duration-300 w-full py-3 rounded-lg text-white text-lg font-semibold">
+              Login
+            </Button>
+          </form>
+
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Not a member?{' '}
+            <button onClick={()=>authDispatch({type :"register"})} href="#" className="font-medium text-blue-600 hover:underline">
+              Sign up to continue
+            </button>
+          </p>
+
+          <div className="flex items-center my-6">
+            <div className="flex-1 h-px bg-gray-300"></div>
+            <p className="px-4 text-sm text-gray-500">OR</p>
+            <div className="flex-1 h-px bg-gray-300"></div>
           </div>
 
-          <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form  className="space-y-6">
-                <Input
-                type={"text"}
-                labelName={"Email"}
-                id={"login-email"}
-                placeHolder={"enter a email address"}
-                />
-                <Input
-                type={"password"}
-                labelName={"Password"}
-                id={"login-password"}
-                placeHolder={"enter a password"}
-                passwordField ={true}
-                />
-                <Button btnStyle={"bg-blue-800 w-96  rounded-lg text-white text-xl font-bold"}>Login</Button>
-            </form>
-  
-            <p className="mt-4 text-center text-sm/6 text-gray-500">
-              Not a member? {' '} 
-              <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                 Signup to continue
-              </a>
-            </p>
-            <p className='text-center my-3'>Or</p>
-            <div className="icons flex justify-evenly mb-6  ">
-                <button className="google flex gap-x-3 shadow shadow-gray-600 py-2 px-5 rounded-4xl ring-blue-400 cursor-pointer hover:bg-gray-200">
-                    <img src={Google} alt="Google" className='w-8 h-8' />
-                    <p className='font-medium text-xl'>google</p>
-                </button>
-                <button className="github flex gap-x-3 shadow shadow-gray-600 py-2 px-5 rounded-4xl ring-blue-400 cursor-pointer hover:bg-gray-200">
-                    <img src={Github} alt="GitHub" className='w-8 h-8' />
-                    <p className='font-medium text-xl'>Github</p>
-                </button>
-            </div>
+          <div className="flex justify-center gap-4">
+            <button className="flex items-center gap-3 shadow-md px-5 py-3 rounded-lg bg-white hover:bg-gray-100 transition-all duration-300 border border-gray-300">
+              <img src={Google} alt="Google" className="w-6 h-6" />
+              <span className="text-gray-700 font-medium">Google</span>
+            </button>
+            <button className="flex items-center gap-3 shadow-md px-5 py-3 rounded-lg bg-white hover:bg-gray-100 transition-all duration-300 border border-gray-300">
+              <img src={Github} alt="GitHub" className="w-6 h-6" />
+              <span className="text-gray-700 font-medium">GitHub</span>
+            </button>
           </div>
         </div>
-      </>
-    )
-  }
-  
+      </div>
+    </div>
+  );
+}

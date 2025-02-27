@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-const AuthContext = createContext()
+export const AuthContext = createContext()
 
 const initialState = {
     name :'',
@@ -10,7 +10,7 @@ const initialState = {
 function AuthContextReducer(state,action){
     switch (action.type) {
         case "register":
-            return { name: "signup", isActive: true };
+            return { name: "register", isActive: true };
         case "login":
             return { name: "login", isActive: true };
         case "verifyEmail":
@@ -39,4 +39,3 @@ export default function AuthContextProvider({children}) {
     )
 }
 
-export {AuthContext};
