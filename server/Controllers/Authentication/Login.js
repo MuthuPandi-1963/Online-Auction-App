@@ -1,5 +1,7 @@
 import userModels from '../../Models/userModels.js'
 import bcryptjs from 'bcryptjs'
+import { CreateToken } from '../../Utils/JWTtoken.js'
+import SendCookie from '../../Utils/SendCookie.js'
 const LoginPage = async(req,res)=>{
     try{
         const {email ,password } = req.body 
@@ -26,6 +28,10 @@ const LoginPage = async(req,res)=>{
         }
         checkUser.isLoggedIn = true;
         await checkUser.save()
+        const token = await CreateToken(checkUser._id);
+
+        // Send token via cookie
+        await SendCookie(res, token);
         const {username :Username , email: Email , role :Role , id} = checkUser
         res.status(201).json({
             success : true,
